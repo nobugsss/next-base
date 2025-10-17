@@ -123,6 +123,7 @@ export default function DatabasePage() {
         setShowUserForm(false);
         setEditingUser(null);
         setUserForm({ username: '', email: '' });
+        setError(null); // 清除错误信息
         fetchUsers();
       } else {
         setError(data.message || '操作失败');
@@ -162,6 +163,7 @@ export default function DatabasePage() {
         setShowProductForm(false);
         setEditingProduct(null);
         setProductForm({ name: '', description: '', price: '', stock: '', category_id: '' });
+        setError(null); // 清除错误信息
         fetchProducts();
       } else {
         setError(data.message || '操作失败');
@@ -184,6 +186,7 @@ export default function DatabasePage() {
       const data = await response.json();
       
       if (data.success) {
+        setError(null); // 清除错误信息
         fetchUsers();
       } else {
         setError(data.message || '删除失败');
@@ -204,6 +207,7 @@ export default function DatabasePage() {
       const data = await response.json();
       
       if (data.success) {
+        setError(null); // 清除错误信息
         fetchProducts();
       } else {
         setError(data.message || '删除失败');
@@ -241,6 +245,7 @@ export default function DatabasePage() {
     setEditingProduct(null);
     setUserForm({ username: '', email: '' });
     setProductForm({ name: '', description: '', price: '', stock: '', category_id: '' });
+    setError(null); // 清除错误信息
   };
 
   return (
@@ -286,17 +291,6 @@ export default function DatabasePage() {
               </button>
             </div>
 
-            {/* 错误信息 */}
-            {error && (
-              <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4 mb-6">
-                <div className="flex">
-                  <svg className="w-5 h-5 text-red-400 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <p className="text-red-800 dark:text-red-200">{error}</p>
-                </div>
-              </div>
-            )}
 
             {/* 用户管理 */}
             {activeTab === 'users' && (
@@ -366,6 +360,19 @@ export default function DatabasePage() {
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                         {editingUser ? '编辑用户' : '添加用户'}
                       </h3>
+                      
+                      {/* 错误信息 */}
+                      {error && (
+                        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 mb-4">
+                          <div className="flex">
+                            <svg className="w-4 h-4 text-red-400 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <p className="text-red-800 dark:text-red-200 text-sm">{error}</p>
+                          </div>
+                        </div>
+                      )}
+                      
                       <form onSubmit={handleUserSubmit}>
                         <div className="space-y-4">
                           <div>
@@ -484,6 +491,19 @@ export default function DatabasePage() {
                       <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-4">
                         {editingProduct ? '编辑产品' : '添加产品'}
                       </h3>
+                      
+                      {/* 错误信息 */}
+                      {error && (
+                        <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-3 mb-4">
+                          <div className="flex">
+                            <svg className="w-4 h-4 text-red-400 mr-2 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                            </svg>
+                            <p className="text-red-800 dark:text-red-200 text-sm">{error}</p>
+                          </div>
+                        </div>
+                      )}
+                      
                       <form onSubmit={handleProductSubmit}>
                         <div className="space-y-4">
                           <div>
