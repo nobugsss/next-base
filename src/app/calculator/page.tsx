@@ -80,25 +80,26 @@ export default function CalculatorPage() {
     }
   };
 
-  const handleKeyPress = (key: string) => {
-    if (key >= '0' && key <= '9') {
-      inputNumber(key);
-    } else if (key === '.') {
-      inputDecimal();
-    } else if (key === '+' || key === '-' || key === '*' || key === '/') {
-      const operationMap: { [key: string]: string } = {
-        '+': '+',
-        '-': '-',
-        '*': '×',
-        '/': '÷'
-      };
-      performOperation(operationMap[key]);
-    } else if (key === 'Enter' || key === '=') {
-      handleEquals();
-    } else if (key === 'Escape' || key === 'c' || key === 'C') {
-      clear();
-    }
-  };
+  // 键盘输入处理函数（暂时注释掉，因为当前没有使用）
+  // const handleKeyPress = (key: string) => {
+  //   if (key >= '0' && key <= '9') {
+  //     inputNumber(key);
+  //   } else if (key === '.') {
+  //     inputDecimal();
+  //   } else if (key === '+' || key === '-' || key === '*' || key === '/') {
+  //     const operationMap: { [key: string]: string } = {
+  //       '+': '+',
+  //       '-': '-',
+  //       '*': '×',
+  //       '/': '÷'
+  //     };
+  //     performOperation(operationMap[key]);
+  //   } else if (key === 'Enter' || key === '=') {
+  //     handleEquals();
+  //   } else if (key === 'Escape' || key === 'c' || key === 'C') {
+  //     clear();
+  //   }
+  // };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 dark:from-gray-900 dark:to-gray-800">
@@ -249,8 +250,8 @@ export default function CalculatorPage() {
               <ul className="text-xs text-blue-700 dark:text-blue-300 space-y-1">
                 <li>• 点击数字按钮输入数字</li>
                 <li>• 点击运算符按钮进行运算</li>
-                <li>• 点击 "=" 按钮计算结果</li>
-                <li>• 点击 "Clear" 按钮清空</li>
+                <li>• 点击 &quot;=&quot; 按钮计算结果</li>
+                <li>• 点击 &quot;Clear&quot; 按钮清空</li>
                 <li>• 支持键盘输入（数字、+、-、*、/、=、Enter、Escape）</li>
               </ul>
             </div>

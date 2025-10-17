@@ -19,7 +19,7 @@ export async function GET() {
         timestamp: new Date().toISOString()
       }
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { success: false, message: '健康检查失败' },
       { status: 500 }

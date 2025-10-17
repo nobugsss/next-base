@@ -39,7 +39,6 @@ export default function CalendarPage() {
 
   // 格式化日期为 MM/DD/YYYY
   const formatDate = (year: number, month: number, day: number) => {
-    const date = new Date(year, month - 1, day);
     const mm = String(month).padStart(2, '0');
     const dd = String(day).padStart(2, '0');
     const yyyy = year;

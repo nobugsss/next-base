@@ -1,5 +1,5 @@
 // API 响应类型定义
-export interface ApiResponse<T = any> {
+export interface ApiResponse<T = unknown> {
   success: boolean;
   data?: T;
   message?: string;
@@ -79,5 +79,5 @@ export interface QueryOptions {
   offset?: number;
   orderBy?: string;
   orderDirection?: 'ASC' | 'DESC';
-  filters?: Record<string, any>;
+  filters?: Record<string, unknown>;
 }

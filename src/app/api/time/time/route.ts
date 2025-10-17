@@ -15,7 +15,7 @@ export async function GET() {
         timezone: Intl.DateTimeFormat().resolvedOptions().timeZone
       }
     });
-  } catch (error) {
+  } catch {
     return NextResponse.json(
       { success: false, message: '获取时间失败' },
       { status: 500 }

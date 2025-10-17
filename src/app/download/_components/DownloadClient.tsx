@@ -28,7 +28,7 @@ export function DownloadClient() {
       } else {
         setError(data.message || '获取文件列表失败');
       }
-    } catch (err) {
+    } catch {
       setError('网络请求失败');
     } finally {
       setLoading(false);
@@ -52,7 +52,7 @@ export function DownloadClient() {
       a.click();
       window.URL.revokeObjectURL(url);
       document.body.removeChild(a);
-    } catch (err) {
+    } catch {
       setError('文件下载失败');
     }
   };
@@ -197,8 +197,8 @@ export function DownloadClient() {
           使用说明：
         </h3>
         <ul className="text-xs text-blue-700 dark:text-blue-300 space-y-1">
-          <li>• 点击"刷新"按钮获取最新的文件列表</li>
-          <li>• 点击"下载"按钮下载对应的文件</li>
+          <li>• 点击&quot;刷新&quot;按钮获取最新的文件列表</li>
+          <li>• 点击&quot;下载&quot;按钮下载对应的文件</li>
           <li>• 文件会直接下载到您的默认下载目录</li>
           <li>• 如果没有文件，请先到上传页面上传文件</li>
         </ul>

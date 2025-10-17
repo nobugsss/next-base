@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import { CategoryService } from "@/lib/services";
 import { ApiResponse } from "@/types/api";
 
@@ -31,7 +31,7 @@ function createErrorResponse(
 }
 
 // 获取分类列表
-export async function GET(request: NextRequest) {
+export async function GET() {
   try {
     const categories = await CategoryService.findAll();
     return createSuccessResponse(categories, "获取分类列表成功");

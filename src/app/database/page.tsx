@@ -127,7 +127,7 @@ export default function DatabasePage() {
       } else {
         setError(data.message || '操作失败');
       }
-    } catch (err) {
+    } catch {
       setError('网络请求失败');
     } finally {
       setLoading(false);
@@ -166,7 +166,7 @@ export default function DatabasePage() {
       } else {
         setError(data.message || '操作失败');
       }
-    } catch (err) {
+    } catch {
       setError('网络请求失败');
     } finally {
       setLoading(false);
@@ -188,7 +188,7 @@ export default function DatabasePage() {
       } else {
         setError(data.message || '删除失败');
       }
-    } catch (err) {
+    } catch {
       setError('网络请求失败');
     }
   };
@@ -208,7 +208,7 @@ export default function DatabasePage() {
       } else {
         setError(data.message || '删除失败');
       }
-    } catch (err) {
+    } catch {
       setError('网络请求失败');
     }
   };

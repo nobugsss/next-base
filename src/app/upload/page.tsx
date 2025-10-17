@@ -56,7 +56,7 @@ export default function UploadPage() {
       } else {
         setError(data.message || '上传失败');
       }
-    } catch (err) {
+    } catch {
       setError('网络请求失败');
     } finally {
       setUploading(false);
@@ -225,7 +225,7 @@ export default function UploadPage() {
               </h3>
               <ul className="text-xs text-blue-700 dark:text-blue-300 space-y-1">
                 <li>• 支持拖拽文件到上传区域</li>
-                <li>• 点击"选择文件"按钮选择文件</li>
+                <li>• 点击&quot;选择文件&quot;按钮选择文件</li>
                 <li>• 单文件上传：一次只能选择一个文件</li>
                 <li>• 多文件上传：可以同时选择多个文件</li>
                 <li>• 上传成功后文件会保存到服务器</li>

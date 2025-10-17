@@ -10,7 +10,7 @@ const UPLOAD_DIR = process.env.UPLOAD_DIR || "uploads";
 async function ensureUploadDir() {
 	try {
 		await mkdir(UPLOAD_DIR, { recursive: true });
-	} catch (error) {
+	} catch {
 		// 目录可能已存在，忽略错误
 	}
 }

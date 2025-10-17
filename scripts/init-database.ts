@@ -1,11 +1,15 @@
 import mysql from "mysql2/promise";
+import { config } from "dotenv";
 
-// 手动读取环境变量（不依赖 dotenv）
-const config = {
+// 加载环境变量
+config();
+
+// 读取环境变量
+const dbConfig = {
 	host: process.env.DB_HOST || "localhost",
 	port: parseInt(process.env.DB_PORT || "3306"),
 	user: process.env.DB_USER || "root",
-	password: process.env.DB_PASSWORD || "112233",
+	password: process.env.DB_PASSWORD || "11223344",
 	database: process.env.DB_NAME || "next_base_db"
 };
 
@@ -13,28 +17,34 @@ async function initDatabase() {
 	let connection;
 
 	try {
+		console.log("🔍 尝试连接数据库...");
+		console.log(`   主机: ${dbConfig.host}`);
+		console.log(`   端口: ${dbConfig.port}`);
+		console.log(`   用户: ${dbConfig.user}`);
+		console.log(`   密码: ${dbConfig.password ? '***' : '(无密码)'}`);
+		
 		// 连接到MySQL服务器（不指定数据库）
 		connection = await mysql.createConnection({
-			host: config.host,
-			port: config.port,
-			user: config.user,
-			password: config.password
+			host: dbConfig.host,
+			port: dbConfig.port,
+			user: dbConfig.user,
+			password: dbConfig.password
 		});
 
 		console.log("✅ 已连接到MySQL服务器");
 
 		// 创建数据库
-		const dbName = config.database;
+		const dbName = dbConfig.database;
 		await connection.execute(`CREATE DATABASE IF NOT EXISTS \`${dbName}\``);
 		console.log(`✅ 数据库 '${dbName}' 创建成功`);
 
 		// 重新连接到指定数据库
 		await connection.end();
 		connection = await mysql.createConnection({
-			host: config.host,
-			port: config.port,
-			user: config.user,
-			password: config.password,
+			host: dbConfig.host,
+			port: dbConfig.port,
+			user: dbConfig.user,
+			password: dbConfig.password,
 			database: dbName
 		});
 

@@ -15,7 +15,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
 
 		const fileBuffer = await readFile(filePath);
 
-		return new NextResponse(fileBuffer, {
+		return new NextResponse(fileBuffer as BodyInit, {
 			headers: {
 				"Content-Type": "application/octet-stream",
 				"Content-Disposition": `attachment; filename="${filename}"`,

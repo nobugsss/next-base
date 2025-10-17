@@ -26,7 +26,7 @@ export function ServerTimeClient() {
       } else {
         setError(data.message || '获取服务器时间失败');
       }
-    } catch (err) {
+    } catch {
       setError('网络请求失败');
     } finally {
       setLoading(false);
@@ -152,7 +152,7 @@ export function ServerTimeClient() {
           说明：
         </h3>
         <ul className="text-xs text-blue-700 dark:text-blue-300 space-y-1">
-          <li>• 点击"刷新时间"按钮获取最新的服务器时间</li>
+          <li>• 点击&quot;刷新时间&quot;按钮获取最新的服务器时间</li>
           <li>• 服务器时间基于服务器所在时区</li>
           <li>• 时间戳为 Unix 时间戳（毫秒）</li>
           <li>• 本地时间根据您的浏览器时区显示</li>

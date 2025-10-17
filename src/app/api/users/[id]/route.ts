@@ -81,7 +81,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     }
 
     // 检查邮箱是否被其他用户使用
-    if (email !== existingUser.email) {
+    if (email !== (existingUser as { email: string }).email) {
       const emailExists = await UserService.existsByEmail(email);
       if (emailExists) {
         return createErrorResponse("邮箱已被其他用户使用", 400);
@@ -89,7 +89,7 @@ export async function PUT(request: NextRequest, { params }: { params: Promise<{ 
     }
 
     // 检查用户名是否被其他用户使用
-    if (username !== existingUser.username) {
+    if (username !== (existingUser as { username: string }).username) {
       const usernameExists = await UserService.existsByUsername(username);
       if (usernameExists) {
         return createErrorResponse("用户名已被其他用户使用", 400);

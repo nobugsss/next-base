@@ -26,7 +26,7 @@ export function ServerTimeDisplay() {
       } else {
         setError(data.message || '获取服务器时间失败');
       }
-    } catch (err) {
+    } catch {
       setError('网络请求失败');
     } finally {
       setLoading(false);

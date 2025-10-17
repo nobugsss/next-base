@@ -4,7 +4,7 @@ import { QueryOptions, PaginationResponse } from '@/types/api';
 // 数据库查询工具类
 export class DatabaseService {
   // 执行查询
-  static async query<T = any>(sql: string, params: any[] = []): Promise<T[]> {
+  static async query<T = unknown>(sql: string, params: unknown[] = []): Promise<T[]> {
     try {
       const [rows] = await pool.execute(sql, params);
       return rows as T[];
@@ -15,16 +15,16 @@ export class DatabaseService {
   }
 
   // 执行单个查询
-  static async queryOne<T = any>(sql: string, params: any[] = []): Promise<T | null> {
+  static async queryOne<T = unknown>(sql: string, params: unknown[] = []): Promise<T | null> {
     const results = await this.query<T>(sql, params);
     return results.length > 0 ? results[0] : null;
   }
 
   // 执行插入操作
-  static async insert(sql: string, params: any[] = []): Promise<number> {
+  static async insert(sql: string, params: unknown[] = []): Promise<number> {
     try {
       const [result] = await pool.execute(sql, params);
-      return (result as any).insertId;
+      return (result as { insertId: number }).insertId;
     } catch (error) {
       console.error('数据库插入错误:', error);
       throw new Error('数据库插入失败');
@@ -32,10 +32,10 @@ export class DatabaseService {
   }
 
   // 执行更新操作
-  static async update(sql: string, params: any[] = []): Promise<number> {
+  static async update(sql: string, params: unknown[] = []): Promise<number> {
     try {
       const [result] = await pool.execute(sql, params);
-      return (result as any).affectedRows;
+      return (result as { affectedRows: number }).affectedRows;
     } catch (error) {
       console.error('数据库更新错误:', error);
       throw new Error('数据库更新失败');
@@ -43,10 +43,10 @@ export class DatabaseService {
   }
 
   // 执行删除操作
-  static async delete(sql: string, params: any[] = []): Promise<number> {
+  static async delete(sql: string, params: unknown[] = []): Promise<number> {
     try {
       const [result] = await pool.execute(sql, params);
-      return (result as any).affectedRows;
+      return (result as { affectedRows: number }).affectedRows;
     } catch (error) {
       console.error('数据库删除错误:', error);
       throw new Error('数据库删除失败');
@@ -58,7 +58,7 @@ export class DatabaseService {
     tableName: string,
     options: QueryOptions = {},
     whereClause: string = '',
-    whereParams: any[] = []
+    whereParams: unknown[] = []
   ): Promise<PaginationResponse<T>> {
     const {
       page = 1,
@@ -100,14 +100,14 @@ export class DatabaseService {
   }
 
   // 检查记录是否存在
-  static async exists(tableName: string, whereClause: string, params: any[]): Promise<boolean> {
+  static async exists(tableName: string, whereClause: string, params: unknown[]): Promise<boolean> {
     const sql = `SELECT 1 FROM ${tableName} WHERE ${whereClause} LIMIT 1`;
     const result = await this.queryOne(sql, params);
     return result !== null;
   }
 
   // 获取记录数量
-  static async count(tableName: string, whereClause: string = '', params: any[] = []): Promise<number> {
+  static async count(tableName: string, whereClause: string = '', params: unknown[] = []): Promise<number> {
     const where = whereClause ? `WHERE ${whereClause}` : '';
     const sql = `SELECT COUNT(*) as total FROM ${tableName} ${where}`;
     const result = await this.queryOne<{ total: number }>(sql, params);

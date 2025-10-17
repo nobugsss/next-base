@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Metadata } from "next";
 import { UserService, ProductService, CategoryService } from "@/lib/services";
+import { User, Product } from "@/types/api";
 import { DatabaseStats } from "./_components/DatabaseStats";
 import { ServerTimeDisplay } from "./_components/ServerTimeDisplay";
 

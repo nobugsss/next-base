@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { User, Product } from '@/types/api';
 
 interface DatabaseStatsProps {

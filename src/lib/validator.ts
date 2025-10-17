@@ -1,18 +1,28 @@
 // 验证工具类
+import { ReadonlyURLSearchParams } from 'next/navigation';
+
 export class Validator {
   // 验证用户数据
-  static validateUser(data: any): { isValid: boolean; errors: string[] } {
+  static validateUser(data: unknown): { isValid: boolean; errors: string[] } {
     const errors: string[] = [];
 
-    if (!data.username || typeof data.username !== 'string' || data.username.trim().length === 0) {
+    // 类型检查
+    if (!data || typeof data !== 'object' || data === null) {
+      errors.push('数据格式不正确');
+      return { isValid: false, errors };
+    }
+
+    const userData = data as Record<string, unknown>;
+
+    if (!userData.username || typeof userData.username !== 'string' || userData.username.trim().length === 0) {
       errors.push('用户名不能为空');
-    } else if (data.username.length < 3 || data.username.length > 50) {
+    } else if (userData.username.length < 3 || userData.username.length > 50) {
       errors.push('用户名长度必须在3-50个字符之间');
     }
 
-    if (!data.email || typeof data.email !== 'string' || data.email.trim().length === 0) {
+    if (!userData.email || typeof userData.email !== 'string' || userData.email.trim().length === 0) {
       errors.push('邮箱不能为空');
-    } else if (!this.isValidEmail(data.email)) {
+    } else if (!this.isValidEmail(userData.email)) {
       errors.push('邮箱格式不正确');
     }
 
@@ -23,28 +33,36 @@ export class Validator {
   }
 
   // 验证产品数据
-  static validateProduct(data: any): { isValid: boolean; errors: string[] } {
+  static validateProduct(data: unknown): { isValid: boolean; errors: string[] } {
     const errors: string[] = [];
 
-    if (!data.name || typeof data.name !== 'string' || data.name.trim().length === 0) {
+    // 类型检查
+    if (!data || typeof data !== 'object' || data === null) {
+      errors.push('数据格式不正确');
+      return { isValid: false, errors };
+    }
+
+    const productData = data as Record<string, unknown>;
+
+    if (!productData.name || typeof productData.name !== 'string' || productData.name.trim().length === 0) {
       errors.push('产品名称不能为空');
-    } else if (data.name.length > 200) {
+    } else if (productData.name.length > 200) {
       errors.push('产品名称不能超过200个字符');
     }
 
-    if (data.description && typeof data.description !== 'string') {
+    if (productData.description && typeof productData.description !== 'string') {
       errors.push('产品描述必须是字符串');
     }
 
-    if (!data.price || typeof data.price !== 'number' || data.price <= 0) {
+    if (!productData.price || typeof productData.price !== 'number' || productData.price <= 0) {
       errors.push('产品价格必须是大于0的数字');
     }
 
-    if (data.stock !== undefined && (typeof data.stock !== 'number' || data.stock < 0)) {
+    if (productData.stock !== undefined && (typeof productData.stock !== 'number' || productData.stock < 0)) {
       errors.push('库存必须是非负整数');
     }
 
-    if (data.category_id !== undefined && data.category_id !== null && (typeof data.category_id !== 'number' || data.category_id <= 0)) {
+    if (productData.category_id !== undefined && productData.category_id !== null && (typeof productData.category_id !== 'number' || productData.category_id <= 0)) {
       errors.push('分类ID必须是正整数');
     }
 
@@ -55,16 +73,24 @@ export class Validator {
   }
 
   // 验证分类数据
-  static validateCategory(data: any): { isValid: boolean; errors: string[] } {
+  static validateCategory(data: unknown): { isValid: boolean; errors: string[] } {
     const errors: string[] = [];
 
-    if (!data.name || typeof data.name !== 'string' || data.name.trim().length === 0) {
+    // 类型检查
+    if (!data || typeof data !== 'object' || data === null) {
+      errors.push('数据格式不正确');
+      return { isValid: false, errors };
+    }
+
+    const categoryData = data as Record<string, unknown>;
+
+    if (!categoryData.name || typeof categoryData.name !== 'string' || categoryData.name.trim().length === 0) {
       errors.push('分类名称不能为空');
-    } else if (data.name.length > 100) {
+    } else if (categoryData.name.length > 100) {
       errors.push('分类名称不能超过100个字符');
     }
 
-    if (data.description && typeof data.description !== 'string') {
+    if (categoryData.description && typeof categoryData.description !== 'string') {
       errors.push('分类描述必须是字符串');
     }
 
@@ -75,7 +101,7 @@ export class Validator {
   }
 
   // 验证分页参数
-  static validatePagination(searchParams: URLSearchParams): { isValid: boolean; errors: string[]; page: number; limit: number } {
+  static validatePagination(searchParams: ReadonlyURLSearchParams | URLSearchParams): { isValid: boolean; errors: string[]; page: number; limit: number } {
     const errors: string[] = [];
     
     const page = parseInt(searchParams.get('page') || '1');
@@ -161,8 +187,14 @@ export class Validator {
   }
 
   // 清理数字输入
-  static sanitizeNumber(input: any): number | null {
-    const num = parseFloat(input);
-    return isNaN(num) ? null : num;
+  static sanitizeNumber(input: unknown): number | null {
+    if (typeof input === 'number') {
+      return isNaN(input) ? null : input;
+    }
+    if (typeof input === 'string') {
+      const num = parseFloat(input);
+      return isNaN(num) ? null : num;
+    }
+    return null;
   }
 }

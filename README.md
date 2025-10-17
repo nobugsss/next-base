@@ -364,14 +364,6 @@ next-base/
 - **索引优化**: 数据库表结构优化
 - **缓存策略**: 可扩展的缓存机制
 
-## 🤝 贡献指南
-
-1. Fork 项目
-2. 创建功能分支 (`git checkout -b feature/AmazingFeature`)
-3. 提交更改 (`git commit -m 'Add some AmazingFeature'`)
-4. 推送到分支 (`git push origin feature/AmazingFeature`)
-5. 打开 Pull Request
-
 ## 📄 许可证
 
 MIT License
