@@ -131,12 +131,9 @@ export default async function Home() {
           <p className="text-gray-500 dark:text-gray-400">
             基于 Next.js 15 + TypeScript + Tailwind CSS 构建
           </p>
-          <p className="text-sm text-gray-400 dark:text-gray-500 mt-2">
-            此页面使用服务器组件渲染，时间信息在服务器端生成
-          </p>
-          <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+          {/* <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
             📊 数据库概览、⏰ 服务器时间、📥 文件下载 已优化为混合架构
-          </p>
+          </p> */}
         </div>
       </div>
     </div>

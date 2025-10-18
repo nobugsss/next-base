@@ -99,47 +99,7 @@ export default async function DatabaseOverviewPage() {
           </div>
 
           {/* 服务器端渲染的静态信息 */}
-          <div className="bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6">
-            <h2 className="text-2xl font-semibold text-gray-900 dark:text-white mb-6">
-              🏗️ 架构说明
-            </h2>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  服务器组件特性
-                </h3>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                  <li>• 数据在服务器端获取和渲染</li>
-                  <li>• 更好的 SEO 和首屏性能</li>
-                  <li>• 减少客户端 JavaScript 包大小</li>
-                  <li>• 直接访问数据库和服务器资源</li>
-                </ul>
-              </div>
-              
-              <div className="space-y-4">
-                <h3 className="text-lg font-semibold text-gray-800 dark:text-gray-200">
-                  客户端组件特性
-                </h3>
-                <ul className="space-y-2 text-gray-600 dark:text-gray-300">
-                  <li>• 支持用户交互和状态管理</li>
-                  <li>• 实时数据更新和刷新</li>
-                  <li>• 浏览器 API 访问</li>
-                  <li>• 事件处理和表单验证</li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg">
-              <h3 className="text-sm font-semibold text-blue-800 dark:text-blue-200 mb-2">
-                说明：
-              </h3>
-              <p className="text-xs text-blue-700 dark:text-blue-300">
-                此页面展示了服务器组件和客户端组件的混合使用。统计数据在服务器端获取，
-                实时更新功能通过客户端组件实现。这种架构既保证了性能，又提供了良好的用户体验。
-              </p>
-            </div>
-          </div>
+          {/* 111 */}
         </div>
       </div>
     </div>
